@@ -26,9 +26,9 @@ import myIconBtn from '@/components/myIconBtn.vue'
           <li class="ml-5 lg:hidden">
             <myIconBtn :icon="'menu'" :size="18"></myIconBtn>
           </li>
-          <li class="ml-5">
+          <!-- <li class="ml-5">
             <myIconBtn :icon="'user'" :size="18"></myIconBtn>
-          </li>
+          </li> -->
         </div>
       </ul>
     </div>

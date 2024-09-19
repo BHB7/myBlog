@@ -45,7 +45,7 @@ onUnmounted(() => {
 
 <template>
   <div
-    class="cont overflow-hidden relative flex w-full bg-cover bg-center bg-origin-content h-full items-end rounded-2xl"
+    class="cont overflow-hidden relative flex w-full bg-cover bg-center bg-origin-content xl:h-96 md:h-80 h-60 items-end rounded-2xl"
     :style="{ backgroundImage: 'url(' + props.imgs[playIndex].url + ')' }"
     :class="{ op: flag, nop: !flag }"
   >
@@ -63,7 +63,10 @@ onUnmounted(() => {
       <button
         v-for="(item, index) in props.imgs.length"
         :key="item"
-        :class="{ 'bg-white h-3 w-3': playIndex === index }"
+        :class="{
+          'bg-white transition delay scale-150': playIndex === index,
+          'transition delay-50 scale-100': playIndex !== index
+        }"
         class="w-2 h-2 border-solid border-2 border-zinc-100 rounded-full mx-1"
       ></button>
     </div>
@@ -84,14 +87,14 @@ onUnmounted(() => {
 
 <style>
 .op {
-  animation: mnop 0.1s forwards ease-in;
+  animation: mnop 0.1s ease-in;
 }
 .nop {
-  animation: mop 0.2s forwards ease-out;
+  animation: mop 0.2s ease-in-out;
 }
 @keyframes mop {
   0% {
-    opacity: 0;
+    opacity: 0.5;
   }
   100% {
     opacity: 1;
@@ -99,10 +102,7 @@ onUnmounted(() => {
 }
 @keyframes mnop {
   0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
+    opacity: 0.5;
   }
   100% {
     opacity: 1;
