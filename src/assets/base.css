@@ -39,3 +39,6 @@
   font-family: myFont;
   src: url('font/ty.ttf');
 }
+.font {
+  font-family: 'myFont';
+}

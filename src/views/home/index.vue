@@ -1,7 +1,8 @@
 <script setup>
 import myArticle from '@/components/myArticle.vue'
 import myCarousel from '@/components/myCarousel.vue'
-import mymMenuBar from '@/components/mymMenuBar.vue'
+import myMenuBar from '@/components/myMenuBar.vue'
+import myList from '@/components/myList.vue'
 import { ref } from 'vue'
 const imgs = [
   {
@@ -24,7 +25,9 @@ const imgs = [
     <!-- 移动设备居下，xl时并列显示 -->
     <div class="r xl:basis-1/4 lg:basis-1/3 basis-full xl:mt-0 xl:ml-4 mt-5">
       <!-- 菜单栏组件 -->
-      <mymMenuBar></mymMenuBar>
+      <myMenuBar>
+        <myList></myList>
+      </myMenuBar>
     </div>
   </div>
   <!-- 内容 -->
@@ -36,6 +39,8 @@ const imgs = [
         class=""
         :img="'https://meteor.demo.cxory.com/wp-content/uploads/2024/05/619d9b70bb088.jpeg'"
       >
+        <template #time>2024-9-20</template>
+        <template #tag> <div class="px-2 rounded-sm bg-green-500">测试</div> </template>
         <template #title>测试</template>
         <template #desc>
           专访腾讯姚建华腾讯 AI Lab 为何瞄准单细胞蛋白质组学 专访腾讯姚建华腾讯 AI Lab
@@ -49,7 +54,12 @@ const imgs = [
       </myArticle>
     </div>
     <!-- 菜单栏 -->
-    <div class="menu w-64 md:mt-5 mt-2 ml-3 bg-slate-500 h-lvh lg:block hidden"></div>
+    <div class="menu w-64 md:mt-5 mt-2 ml-3 h-lvh lg:block hidden">
+      <myMenuBar>
+        <template #title>最新文章</template>
+        哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+      </myMenuBar>
+    </div>
   </div>
 </template>
 

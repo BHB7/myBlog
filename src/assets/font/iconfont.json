@@ -6,6 +6,55 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "339725",
+      "name": "views",
+      "font_class": "views",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "4487893",
+      "name": "标签",
+      "font_class": "biaoqian",
+      "unicode": "e693",
+      "unicode_decimal": 59027
+    },
+    {
+      "icon_id": "6422297",
+      "name": "views",
+      "font_class": "views1",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "6486517",
+      "name": "时间",
+      "font_class": "shijian",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "7226228",
+      "name": "时间",
+      "font_class": "shijian1",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
+      "icon_id": "8287288",
+      "name": "标签",
+      "font_class": "biaoqian1",
+      "unicode": "e66c",
+      "unicode_decimal": 58988
+    },
+    {
+      "icon_id": "27520556",
+      "name": "设备2",
+      "font_class": "shebei2",
+      "unicode": "e933",
+      "unicode_decimal": 59699
+    },
+    {
       "icon_id": "20284988",
       "name": "x",
       "font_class": "x",
