@@ -4,15 +4,15 @@ import myCarousel from '@/components/myCarousel.vue'
 import myMenuBar from '@/components/myMenuBar.vue'
 import myList from '@/components/myList.vue'
 import { ref } from 'vue'
-const imgs = [
-  {
-    url: 'https://meteor.demo.cxory.com/wp-content/uploads/2024/05/619d9b70bb088.jpeg',
-    desc: '测试'
-  },
-  {
-    url: 'https://meteor.demo.cxory.com/wp-content/uploads/2024/05/IMG_202405292291-1024x907.webp'
-  }
-]
+import { getArticleList } from '@/api/articles'
+
+getArticleList('new')
+  .then((result) => {
+    articles.value = result.data
+  })
+  .catch((err) => {})
+const imgs = ref([])
+const articles = ref([])
 </script>
 <template>
   <!-- 版心 -->
@@ -36,27 +36,24 @@ const imgs = [
     <!-- 内容展示 -->
     <div class="cont py-2 md:mt-5 mt-2 flex-1">
       <myArticle
-        class=""
+        v-for="(item, index) in articles"
+        :key="index"
+        class="mb-4"
         :img="'https://meteor.demo.cxory.com/wp-content/uploads/2024/05/619d9b70bb088.jpeg'"
       >
         <template #time>2024-9-20</template>
         <template #tag> <div class="px-2 rounded-sm bg-green-500">测试</div> </template>
-        <template #title>测试</template>
-        <template #desc>
-          专访腾讯姚建华腾讯 AI Lab 为何瞄准单细胞蛋白质组学 专访腾讯姚建华腾讯 AI Lab
-          为何瞄准单细胞蛋白质组学 专访腾讯姚建华腾讯 AI Lab 为何瞄准单细胞蛋白质组学
-          专访腾讯姚建华腾讯 AI Lab 为何瞄准单细胞蛋白质组学 专访腾讯姚建华腾讯 AI Lab
-          为何瞄准单细胞蛋白质组学 专访腾讯姚建华腾讯 AI Lab 为何瞄准单细胞蛋白质组学</template
-        >
+        <template #title>{{ item.title }}</template>
+        <template #desc> {{ item.content }}</template>
         <template #cover>
-          <img class="h-full w-full" src="@/assets/test.png" alt="" />
+          <img class="h-full w-full" :src="item.imgUrl" alt="" />
         </template>
       </myArticle>
     </div>
     <!-- 菜单栏 -->
     <div class="menu w-64 md:mt-5 mt-2 ml-3 h-lvh lg:block hidden">
       <myMenuBar>
-        <template #title>最新文章</template>
+        <template #title><span class="iconfont icon-huatifuhao"></span>最新文章</template>
         哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
       </myMenuBar>
     </div>

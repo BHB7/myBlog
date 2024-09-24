@@ -25,7 +25,7 @@ const props = defineProps({
     <div
       class="font-light backdrop-blur-sm text-xs p-1 text-white items-center lg:hidden absolute top-0"
     >
-      <div class="flex">
+      <div class="flex p-1">
         <span class="iconfont icon-shijian mr-1"></span>
         <span>发布于：<slot name="time">1984-9-9</slot></span>
         <!-- 标签 -->
@@ -36,8 +36,9 @@ const props = defineProps({
         </div>
       </div>
     </div>
+    <!-- 描述容器 -->
     <div
-      class="flex-1 overflow-hidden backdrop-blur-md lg:p-6 p-2 lg:static lg:h-full absolute bottom-0 h-2/4"
+      class="flex-1 w-full overflow-hidden backdrop-blur-md lg:p-6 p-2 lg:static lg:h-full absolute bottom-0 h-2/4"
     >
       <div class="font-light text-xs text-white items-center lg:flex hidden">
         <span class="iconfont icon-shijian mr-1"></span>

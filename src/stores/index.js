@@ -1,9 +1,11 @@
 import { createPinia } from 'pinia'
-import piniaPlugin from 'pinia-plugin-persistedstate'
+import persist from 'pinia-plugin-persistedstate'
 
 const pinia = createPinia()
-pinia.use(piniaPlugin)
+pinia.use(persist)
+
 export default pinia
+
 // import { useUserStore } from './modules/user'
 // import { useCounterStore } from './modules/counter'
 // export {

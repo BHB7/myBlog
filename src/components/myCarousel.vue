@@ -46,11 +46,11 @@ onUnmounted(() => {
 <template>
   <div
     class="cont overflow-hidden relative flex w-full bg-cover bg-center bg-origin-content xl:h-96 md:h-80 h-60 items-end rounded-2xl"
-    :style="{ backgroundImage: 'url(' + props.imgs[playIndex].url + ')' }"
+    :style="{ backgroundImage: 'url(' + props.imgs[playIndex]?.cover + ')' }"
     :class="{ op: flag, nop: !flag }"
   >
     <img
-      :src="props.imgs[playIndex].url"
+      :src="props.imgs[playIndex]?.cover"
       alt=""
       class="transition delay-50 hover:scale-105 object-cover absolute top-0 left-0 w-full h-full"
     />
@@ -71,10 +71,10 @@ onUnmounted(() => {
       ></button>
     </div>
     <div
-      v-if="props.imgs[playIndex].desc"
+      v-if="props.imgs[playIndex]?.content"
       class="desc text-white mb-10 ml-10 font-extrabold rounded-md px-2 backdrop-blur-xl"
     >
-      {{ props.imgs[playIndex].desc }}
+      {{ props.imgs[playIndex]?.content }}
     </div>
   </div>
   <div

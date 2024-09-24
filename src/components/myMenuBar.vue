@@ -1,6 +1,6 @@
 <script setup></script>
 <template>
-  <section class="w-full bg-gray-200 p-2 rounded-md">
+  <section class="w-full shadow-xl bg-gray-200 p-2 rounded-md">
     <header class="w-full h-10 flex items-center hr">
       <slot name="title">
         <!-- 标题 -->

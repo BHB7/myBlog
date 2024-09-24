@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "1097395",
+      "name": "发布",
+      "font_class": "fabu",
+      "unicode": "e692",
+      "unicode_decimal": 59026
+    },
+    {
+      "icon_id": "1206342",
+      "name": "发布2",
+      "font_class": "fabu2",
+      "unicode": "e61e",
+      "unicode_decimal": 58910
+    },
+    {
+      "icon_id": "4880142",
+      "name": "发布",
+      "font_class": "fabu1",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
       "icon_id": "339725",
       "name": "views",
       "font_class": "views",

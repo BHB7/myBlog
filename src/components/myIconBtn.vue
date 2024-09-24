@@ -23,6 +23,8 @@ const getIcon = computed(() => {
       return 'iconfont icon-icon-test5'
     case 'menu':
       return 'iconfont icon-caidan'
+    case 'icon-fabu1':
+      return 'iconfont icon-fabu1'
   }
   return 'iconfont icon-icon-test14'
 })
@@ -36,6 +38,7 @@ const onSubmit = () => {
 
 <template>
   <button
+    class="shadow-xl"
     @click="onSubmit"
     type="button"
     :style="{

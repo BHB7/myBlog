@@ -17,6 +17,11 @@ const router = createRouter({
           component: () => import('@/views/home/index.vue')
         }
       ]
+    },
+    {
+      path: '/root',
+      name: 'root',
+      component: () => import('@/views/root/root.vue')
     }
   ]
 })
