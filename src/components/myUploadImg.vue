@@ -4,10 +4,10 @@ import axios from 'axios'
 import CryptoJS from 'crypto-js' // 使用 crypto-js 进行加密
 
 // 获取 Vercel 注入的环境变量 (确保在 Vercel 设置了相关环境变量)
-const BUCKET = import.meta.env.BUCKET // 存储桶
-const PATH = import.meta.env.PATH // 文件路径
-const USERNAME = import.meta.env.OSS_USERNAME // UPYUN 用户名
-const PASSWORD = import.meta.env.OSS_PWD // UPYUN 密码
+const BUCKET = process.env.BUCKET // 存储桶
+const PATH = process.env.PATH // 文件路径
+const USERNAME = process.env.OSS_USERNAME // UPYUN 用户名
+const PASSWORD = process.env.OSS_PWD // UPYUN 密码
 const imgLocalUrl = ref()
 
 const emit = defineEmits(['setImgUrl'])
