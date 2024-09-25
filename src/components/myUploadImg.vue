@@ -4,10 +4,12 @@ import axios from 'axios'
 import CryptoJS from 'crypto-js' // 使用 crypto-js 进行加密
 
 // 获取 Vercel 注入的环境变量 (确保在 Vercel 设置了相关环境变量)
-const BUCKET = process.env.BUCKET // 存储桶
-const PATH = process.env.PATH // 文件路径
-const USERNAME = process.env.OSS_USERNAME // UPYUN 用户名
-const PASSWORD = process.env.OSS_PWD // UPYUN 密码
+const BUCKET = import.meta.env.VITE_BUCKET // 存储桶
+const PATH = import.meta.env.VITE_PATH // 文件路径
+const USERNAME = import.meta.env.VITE_USERNAME // UPYUN 用户名
+const PASSWORD = import.meta.env.VITE_PASSWORD // UPYUN 密码
+const img_base_url = import.meta.env.VITE_URL // UPYUN 密码
+
 const imgLocalUrl = ref()
 
 const emit = defineEmits(['setImgUrl'])
@@ -50,16 +52,14 @@ const uploadImg = async (e) => {
   axios({ method: 'POST', url, data: uploadData })
     .then((res) => {
       console.log('上传成功:', res.data)
-      imgLocalUrl.value = res.data.url // 上传成功后显示图片
+      imgLocalUrl.value = img_base_url + res.data.url // 上传成功后显示图片
+      console.log(imgLocalUrl.value)
       setImgUrl() // 传递图片URL给父组件
     })
     .catch((e) => {
       console.error('上传失败', e)
       alert('上传失败')
     })
-
-  /* 清除 input 的值，解决二次上传文件未触发 */
-  document.getElementById('file').value = ''
 }
 </script>
 
