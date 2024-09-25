@@ -2,7 +2,7 @@
 import myIconBtn from '@/components/myIconBtn.vue'
 import myRowTab from '@/components/myRowTab.vue'
 import { addArticleU } from '@/api/articles'
-
+import myUploadImg from '@/components/myUploadImg.vue'
 addArticleU({
   uid: 'root',
   title: '测试',
@@ -27,6 +27,7 @@ addArticleU({
     <myIconBtn class="ml-2" :icon="'icon-fabu1'" :size="18"></myIconBtn>
     <myIconBtn class="ml-2" :icon="'search'" :size="18"></myIconBtn>
   </div>
+  <myUploadImg></myUploadImg>
 </template>
 
 <style scoped>

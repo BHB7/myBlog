@@ -1,44 +1,44 @@
 <script setup>
 const props = defineProps({
-  title: {
+  // trend 为 'end' 时颠倒子元素的显示顺序，默认为 'start'
+  trend: {
     type: String,
-    default: ''
-  },
-  desc: {
-    type: String,
-    default: ''
-  },
-  img: {
-    type: String,
-    default: ''
+    default: 'start'
   }
 })
 </script>
+
 <template>
   <section
-    class="shadow-xl w-full relative flex lg:flex-row h-52 flex-col rounded-md overflow-hidden"
+    :class="[
+      'shadow-xl w-full relative flex h-52 rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105',
+      trend === 'end' ? 'lg:flex-row-reverse flex-col-reverse' : 'lg:flex-row flex-col'
+    ]"
   >
-    <div class="cover lg:w-2/4 w-full object-cover h-full">
+    <!-- 封面图 -->
+    <div class="lg:w-2/4 w-full object-cover h-full cover-box">
       <slot name="cover"></slot>
     </div>
+
     <!-- 移动端标签 -->
     <div
-      class="font-light backdrop-blur-sm text-xs p-1 text-white items-center lg:hidden absolute top-0"
+      class="font-light backdrop-blur-sm text-xs p-2 text-white items-center lg:hidden absolute top-0 left-0 bg-opacity-40 bg-zinc-900 rounded-br-lg"
     >
-      <div class="flex p-1">
+      <div class="flex items-center p-1">
         <span class="iconfont icon-shijian mr-1"></span>
         <span>发布于：<slot name="time">1984-9-9</slot></span>
         <!-- 标签 -->
         <div class="flex mx-2">
           <slot name="tag">
-            <div class="px-2 bg-red-400 rounded-sm">暂无</div>
+            <div class="px-2 py-1 bg-red-500 rounded-md">暂无</div>
           </slot>
         </div>
       </div>
     </div>
+
     <!-- 描述容器 -->
     <div
-      class="flex-1 w-full overflow-hidden backdrop-blur-md lg:p-6 p-2 lg:static lg:h-full absolute bottom-0 h-2/4"
+      class="flex-1 w-full overflow-hidden lg:p-6 p-4 lg:static lg:h-full absolute bottom-0 h-2/4 bg-gradient-to-b to-transparent"
     >
       <div class="font-light text-xs text-white items-center lg:flex hidden">
         <span class="iconfont icon-shijian mr-1"></span>
@@ -46,46 +46,42 @@ const props = defineProps({
         <!-- 标签 -->
         <div class="flex mx-2">
           <slot name="tag">
-            <div class="px-2 bg-red-400 rounded-sm">暂无</div>
+            <div class="px-2 py-1 bg-red-500 rounded-md">暂无</div>
           </slot>
         </div>
       </div>
 
       <!-- 描述 -->
-      <article class="lg:py-5 h-1/3">
-        <h3 class="truncate-multiline-h my-1 font-semibold text-xl text-white">
+      <article class="lg:py-5 h-2/3">
+        <h3 class="truncate-multiline-h my-1 font-semibold text-2xl text-white">
           <slot name="title"></slot>
         </h3>
-        <p class="truncate-multiline-b font-light text-white">
+        <p class="truncate-multiline-b font-light text-white text-sm leading-relaxed">
           <slot name="desc"></slot>
         </p>
       </article>
     </div>
+
     <!-- 模糊背景 -->
-    <div class="absolute bg-blur top-0 left-0 bg-zinc-900 w-full h-full">
+    <div
+      class="absolute bg-blur blur-md overflow-hidden scale-110 top-0 left-0 bg-zinc-900 w-full h-full"
+    >
       <slot name="cover"></slot>
     </div>
   </section>
 </template>
 
 <style scoped>
+.cover-box {
+  -webkit-clip-path: polygon(0 1%, 100% 0, 80% 100%, 0 100%);
+  clip-path: polygon(0 1%, 100% 0, 80% 100%, 0 100%);
+}
 .bg-blur {
   z-index: -1;
 }
-.covera {
-  clip-path: polygon(0 0, 100% 0, 94% 100%, 0 100%);
-}
 .truncate-multiline-h {
   display: -webkit-box;
-  -webkit-line-clamp: 1; /* 需要的行数 */
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.truncate-multiline {
-  font-size: 0.9rem;
-  display: -webkit-box;
-  -webkit-line-clamp: 3; /* 需要的行数 */
+  -webkit-line-clamp: 1; /* 显示的行数 */
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -93,7 +89,7 @@ const props = defineProps({
 .truncate-multiline-b {
   font-size: 0.9rem;
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* 需要的行数 */
+  -webkit-line-clamp: 2; /* 显示的行数 */
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
