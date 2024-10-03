@@ -23,13 +23,13 @@ const backgroundImageUrl = ref(
 .body-box {
   width: 100%;
   height: 100vh;
-  position: absolute;
+  position: fixed;
   z-index: -1; // 改为 -1 以确保它在内容后面
   top: 0;
   left: 0;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-attachment: fixed; // 固定背景
+  // background-attachment: fixed; // 固定背景
 }
 </style>
