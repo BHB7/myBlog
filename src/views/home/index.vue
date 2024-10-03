@@ -6,7 +6,7 @@ import myList from '@/components/myList.vue'
 import { ref } from 'vue'
 import { getArticleList } from '@/api/articles'
 
-getArticleList('new')
+getArticleList()
   .then((result) => {
     articles.value = result.data
   })

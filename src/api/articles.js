@@ -4,9 +4,9 @@ import request from '@/utils/request'
  * @param {String} manner 类型 new 最新 hot 最热
  * @returns List[]
  */
-export const getArticleList = (manner) => {
+export const getArticleList = () => {
   //  // 配置基础地址 http://localhost:7777/article/articleList?pageNum=1&pageSize=10&categoryId=1
-  return request.get(`/articles?manner=${manner}`)
+  return request.get(`/articles`)
 }
 
 /**
