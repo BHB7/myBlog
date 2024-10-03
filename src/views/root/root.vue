@@ -9,9 +9,15 @@ import myUploadImg from '@/components/myUploadImg.vue'
 //   tag: '测试',
 //   imgUrl: 'https://koxiuqiu.cn/img/favicon.png'
 // })
+const backgroundImageUrl = ref(
+  'https://blog-1312814407.cos.ap-nanjing.myqcloud.com/mmexport1727600601783.jpg'
+)
 </script>
 <template>
-  <div class="w-full pt-48 bg-black flex justify-center">
+  <div
+    class="w-full body-box pt-48 bg-black flex justify-center"
+    :style="{ backgroundImage: `url(${backgroundImageUrl})` }"
+  >
     <div class="relative w-1/2 h-32 bg-red-500 rounded-t-md flex justify-center">
       <div
         class="w-28 h-28 mb-5 object-cover absolute -top-12 left-1/2 bg-white rounded-full border-2 border-white overflow-hidden"
@@ -31,7 +37,16 @@ import myUploadImg from '@/components/myUploadImg.vue'
 </template>
 
 <style scoped>
-.a {
-  transform: translateX(-50%);
+.body-box {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
 }
 </style>
