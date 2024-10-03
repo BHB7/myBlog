@@ -26,9 +26,6 @@ export const upload = (file) => {
           Key
         } = data.data
 
-        const AppId = Bucket.substr(Bucket.lastIndexOf('-') + 1) // 从 Bucket 中提取 AppId
-        const imgUrl = `https://${Bucket}.cos.${Region}.myqcloud.com/${Key}`
-
         // 创建 JS SDK 实例，传入临时密钥参数
         const cos = new COS({
           SecretId: TmpSecretId,
@@ -55,7 +52,7 @@ export const upload = (file) => {
               reject(err)
             } else {
               console.log('上传结束', data)
-              resolve({ data, imgUrl }) // 返回上传结果和 URL
+              resolve({ data }) // 返回上传结果和 URL
             }
           }
         )
