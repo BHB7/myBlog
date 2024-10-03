@@ -40,7 +40,7 @@ const backgroundImageUrl = ref(
 <style scoped>
 .body-box {
   width: 100%;
-  height: 100vh;
+  /* height: 100vh; */
   position: absolute;
   z-index: -1;
   top: 0;
