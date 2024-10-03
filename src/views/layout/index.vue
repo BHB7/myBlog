@@ -6,7 +6,8 @@ defineOptions({
 </script>
 <template>
   <myNav></myNav>
-  <div class="lg:my-5 w m-auto max-w-5xl w-full px-2 lg:px-0">
+  <div style="background-image:url(https://blog-1312814407.cos.ap-nanjing.myqcloud.com/mmexport1727600601783.jpg); background-attachment: fixed;
+    background-size: cover;background-position:center" class="lg:my-5 w m-auto max-w-5xl w-full px-2 lg:px-0">
     <router-view />
   </div>
 </template>
