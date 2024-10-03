@@ -23,8 +23,8 @@ const uploadImg = async (e) => {
 
   try {
     const res = await upload(file)
-    console.log('上传成功:', res)
-    imgLocalUrl.value = img_base_url + res.data.url // 上传成功后显示图片
+    console.log('上传成功:', res.data.Location)
+    imgLocalUrl.value = res.data.Location // 上传成功后显示图片
     setImgUrl() // 传递图片URL给父组件
   } catch (error) {
     console.error('上传失败:', error)
