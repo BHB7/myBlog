@@ -3,12 +3,12 @@ import myIconBtn from '@/components/myIconBtn.vue'
 import myRowTab from '@/components/myRowTab.vue'
 import { addArticleU } from '@/api/articles'
 import myUploadImg from '@/components/myUploadImg.vue'
-addArticleU({
-  uid: 'root',
-  title: '测试',
-  tag: '测试',
-  imgUrl: 'https://koxiuqiu.cn/img/favicon.png'
-})
+// addArticleU({
+//   uid: 'root',
+//   title: '测试',
+//   tag: '测试',
+//   imgUrl: 'https://koxiuqiu.cn/img/favicon.png'
+// })
 </script>
 <template>
   <div class="w-full pt-48 bg-black flex justify-center">

@@ -2,7 +2,7 @@ import COS from 'cos-js-sdk-v5'
 
 // 上传文件，file 为选择的文件
 export const upload = (file) => {
-  // stsUrl 是上方搭建的临时密钥服务
+  // stsUrl 临时密钥服务
   const stsUrl = `https://blogs.vocucc.cn/api/getKeyAndCredentials?filename=${file.name}`
 
   return new Promise((resolve, reject) => {
