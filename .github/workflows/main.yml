@@ -1,0 +1,57 @@
+name: CI
+
+# 触发workflow的条件
+on:
+  push:
+    # 只有 main 分支发生 push 事件时，才会触发 workflow
+    branches: [main]
+
+# jobs 表示执行的一项或多项任务
+jobs:
+  # 任务的 job_id，具体名称自定义，这里 build 代表打包
+  build:
+    # runs-on 字段指定运行所需要的虚拟机环境。注意：这是必填字段
+    runs-on: ubuntu-latest
+    steps:
+      # 切代码到 runner
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 在当前操作系统安装 Node.js
+      - name: Install Node.js
+        uses: actions/setup-node@v4.0.3
+        with:
+          node-version: '20'
+
+      # 删除 node_modules 和 package-lock.json
+      - name: Remove node_modules and package-lock.json
+        run: |
+          rm -rf node_modules
+          rm -f package-lock.json
+
+      # 安装依赖项
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Print Node.js version
+        run: node --version
+
+      - name: Print npm version
+        run: npm --version
+
+      - name: Build Application
+        run: npm run build
+
+      - name: List files in dist
+        run: ls -la dist
+
+      # 使用 SCP 部署文件
+      - name: Deploy via SCP
+        uses: appleboy/scp-action@v0.1.1
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          password: ${{ secrets.REMOTE_PASS }}
+          port: ${{ secrets.REMOTE_PORT }}
+          source: 'dist/'
+          target: '/www/wwwroot/web.vocucc.cn/'
