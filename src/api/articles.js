@@ -5,8 +5,9 @@ import request from '@/utils/request'
  * @returns List[]
  */
 export const getArticleList = () => {
+  console.log('请求')
   //  // 配置基础地址 http://localhost:7777/article/articleList?pageNum=1&pageSize=10&categoryId=1
-  return request.get(`/articles`)
+  return request.get(`/article`)
 }
 
 /**
@@ -15,7 +16,7 @@ export const getArticleList = () => {
  */
 export const getArticleDetails = (aid) => {
   // console.log(aid)
-  return request.get(`/articles/${aid}`) // 添加 return 关键字
+  return request.get(`/article/${aid}`) // 添加 return 关键字
 }
 
 /**
@@ -56,7 +57,7 @@ export const addLike = (cid) => {
  */
 export const addArticleU = (obj) => {
   const { uid, title, content, tag, imgUrl } = obj
-  return request.post('/articles', {
+  return request.post('/article', {
     uid,
     title,
     tag,

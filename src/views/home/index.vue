@@ -3,16 +3,21 @@ import myArticle from '@/components/myArticle.vue'
 import myCarousel from '@/components/myCarousel.vue'
 import myMenuBar from '@/components/myMenuBar.vue'
 import myList from '@/components/myList.vue'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { getArticleList } from '@/api/articles'
 
-getArticleList()
-  .then((result) => {
-    articles.value = result.data
-  })
-  .catch((err) => {})
-const imgs = ref([])
 const articles = ref([])
+onMounted(() => {
+  console.log(articles.value)
+  getArticleList()
+    .then((result) => {
+      console.log('完成')
+      articles.value = result.data
+      console.log(articles.value)
+    })
+    .catch((err) => {})
+})
+const imgs = ref([])
 </script>
 <template>
   <!-- 版心 -->
@@ -35,18 +40,13 @@ const articles = ref([])
     <!-- 使用 flex 布局 -->
     <!-- 内容展示 -->
     <div class="cont py-2 md:mt-5 mt-2 flex-1">
-      <myArticle
-        v-for="(item, index) in articles"
-        :key="index"
-        class="mb-4"
-        :img="'https://meteor.demo.cxory.com/wp-content/uploads/2024/05/619d9b70bb088.jpeg'"
-      >
+      <myArticle v-for="(item, index) in articles" :key="index" class="mb-4" :img="item.cover">
         <template #time>2024-9-20</template>
         <template #tag> <div class="px-2 rounded-sm bg-green-500">测试</div> </template>
         <template #title>{{ item.title }}</template>
-        <template #desc> {{ item.content }}</template>
+        <template #desc> {{ item.desc }}</template>
         <template #cover>
-          <img class="h-full w-full" :src="item.imgUrl" alt="" />
+          <img class="h-full w-full" :src="item.cover" alt="" />
         </template>
       </myArticle>
     </div>
