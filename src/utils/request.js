@@ -6,7 +6,7 @@ import config from '@/utils/constant' // 导入你提供的配置文件
 
 // 创建实例
 const service = axios.create({
-  baseURL: 'http://127.0.0.1:8000', // 请求地址
+  baseURL: 'http://154.201.87.187:8000', // 请求地址
   timeout: 5000 // 超时
 })
 
