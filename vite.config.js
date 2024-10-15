@@ -13,11 +13,17 @@ export default defineConfig({
     }
   },
   base: '/',
+  // 生产环境移除console.log的配置
   build: {
-    outDir: 'dist', // 输出目录
-    assetsDir: 'assets', // 静态资源目录
-    rollupOptions: {
-      input: 'src/main.js' // 入口文件
+    // 默认是esbuild,但这里需要改成terser，并且想使用terser的话，需提前安装，命令为npm add -D
+    //terser
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        //生产环境时移除console
+        drop_console: true,
+        drop_debugger: true
+      }
     }
   },
   server: {
