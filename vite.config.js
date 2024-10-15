@@ -7,6 +7,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue(), vueDevTools()],
+  publicPath: './', //打包后的位置(如果不设置这个静态资源会报404)
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
