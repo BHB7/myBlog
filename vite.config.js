@@ -12,6 +12,14 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
+  base: '/',
+  build: {
+    outDir: 'dist', // 输出目录
+    assetsDir: 'assets', // 静态资源目录
+    rollupOptions: {
+      input: 'src/main.js' // 入口文件
+    }
+  },
   server: {
     proxy: {
       '/blog': {
