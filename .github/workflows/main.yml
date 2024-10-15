@@ -53,5 +53,6 @@ jobs:
           username: ${{ secrets.REMOTE_USER }}
           password: ${{ secrets.REMOTE_PASS }}
           port: ${{ secrets.REMOTE_PORT }}
-          source: 'web.vocucc.cn/myblog/'
-          target: '/www/wwwroot/'
+          source: 'dist'
+          target: '/www/wwwroot/web.vocucc.cn/myblog/'
+          debug: true
