@@ -1,12 +1,4 @@
-<script setup>
-const props = defineProps({
-  // trend 为 'end' 时颠倒子元素的显示顺序，默认为 'start'
-  trend: {
-    type: String,
-    default: 'end'
-  }
-})
-</script>
+<script setup></script>
 
 <template>
   <section
@@ -25,20 +17,22 @@ const props = defineProps({
     >
       <!-- 描述 -->
       <article class="">
-        <h3 class="truncate-multiline-h my-1 font-semibold text-2xl text-white">
+        <h3 class="truncate-multiline-h my-1 font-semibold text-xl text-white">
           <slot name="title"></slot>
         </h3>
         <p class="truncate-multiline-b font-light text-slate-100 text-sm leading-relaxed">
           <slot name="desc"></slot>
         </p>
       </article>
-      <div class="font-light text-xs text-white items-center flex">
-        <span class="iconfont icon-shijian mr-1"></span>
-        <span>发布于：<slot name="time">1984-9-9</slot></span>
+      <div class="font-light truncate-multiline-h text-xs text-white items-center flex">
+        <div class="flex my-2">
+          <span class="iconfont icon-shijian mr-1"></span>
+          <span>发布于：<slot name="time">1984-9-9</slot></span>
+        </div>
         <!-- 标签 -->
-        <div class="flex mx-2">
+        <div class="flex">
           <slot name="tag">
-            <div class="px-2 py-1 bg-red-500 rounded-md">暂无</div>
+            <div class="py-4 bg-red-500 rounded-md">暂无</div>
           </slot>
         </div>
       </div>
