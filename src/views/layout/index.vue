@@ -14,12 +14,17 @@ const backgroundImageUrl = ref(
 <template>
   <div class="body-box" :style="{ backgroundImage: `url(${backgroundImageUrl})` }"></div>
   <myNav></myNav>
-  <div class="lg:my-5 m-auto max-w-5xl w-full px-2 lg:px-0">
+  <div class="lg:my-5 py-20 m-auto max-w-5xl w-full px-2 lg:px-0">
     <router-view />
   </div>
 </template>
 
 <style lang="scss" scoped>
+@import '../../style/theme/handle.scss';
+body {
+  @include background_color('bg-color');
+  @include font_color('font-color');
+}
 .body-box {
   width: 100%;
   height: 100vh;
