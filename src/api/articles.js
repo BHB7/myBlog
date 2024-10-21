@@ -24,5 +24,5 @@ export const getCategoryService = () => {
  */
 export const getArticleDetailsService = (aid) => {
   // console.log(aid)
-  return request.get(`/article/${aid}`) // 添加 return 关键字
+  return request.get(`/article/details/${aid}`) // 添加 return 关键字
 }
