@@ -40,6 +40,10 @@
   font-family: myFont;
   src: url('../assets/font/ty.ttf');
 }
+@font-face {
+  font-family: title;
+  src: url('../assets/font/PingFang/苹方黑体-准-简.ttf');
+}
 .font {
   font-family: 'myFont';
 }

@@ -12,11 +12,14 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@highlightjs/vue-plugin": "^2.1.2",
     "@wangeditor/editor": "^5.1.23",
     "axios": "^1.7.7",
     "cos-js-sdk-v5": "^1.8.4",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.13",
+    "gasp": "^0.0.2",
+    "highlight.js": "^11.10.0",
     "hydrogen-js-sdk": "^2.6.0",
     "iscroll": "^5.2.0",
     "pinia": "^2.2.2",

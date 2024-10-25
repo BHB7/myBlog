@@ -7,14 +7,17 @@ defineOptions({
 })
 
 const backgroundImageUrl = ref(
-  'https://blog-1312814407.cos.ap-nanjing.myqcloud.com/mmexport1727600601783.jpg'
+  'https://cn-sy1.rains3.com/testasd/1728201507813-wallhaven-3le8j3.jpg'
 )
 </script>
 
 <template>
+  <div class="w-20 h-lvh rounded-sm backdrop-blur-xl fixed"></div>
   <div class="body-box" :style="{ backgroundImage: `url(${backgroundImageUrl})` }"></div>
-  <myNav></myNav>
-  <div class="lg:my-5 py-20 m-auto max-w-5xl w-full px-2 lg:px-0">
+  <!-- 版心图 -->
+  <!-- <div class="cont flex h-96 bg-black"></div> -->
+  <!-- <myNav></myNav> -->
+  <div class="lg:my-2 py-20 m-auto max-w-5xl w-full px-2 lg:px-0">
     <router-view />
   </div>
 </template>

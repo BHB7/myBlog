@@ -2,10 +2,10 @@
 
 <template>
   <section
-    class="shadow-xl w-full relative flex h-40 p-2 border-solid rounded-lg overflow-hidden transition-transform duration-300 flex-row"
+    class="shadow-xl w-full relative flex h-32 xl:h-44 p-2 rounded-lg overflow-hidden transition-transform duration-300 flex-row"
   >
     <!-- 封面图 -->
-    <div class="w-2/4 object-cover h-full cover-box overflow-hidden rounded-lg">
+    <div class="w-2/4 object-cover h-full shadow-2xl cover-box overflow-hidden rounded-lg">
       <slot name="cover"></slot>
     </div>
 
@@ -17,10 +17,10 @@
     >
       <!-- 描述 -->
       <article class="">
-        <h3 class="truncate-multiline-h my-1 font-semibold text-xl text-white">
+        <h3 class="title truncate-multiline-h my-1 font-semibold text-lg text-white">
           <slot name="title"></slot>
         </h3>
-        <p class="truncate-multiline-b font-light text-slate-100 text-sm leading-relaxed">
+        <p class="truncate-multiline-b font-light text-slate-100 text-xs leading-relaxed">
           <slot name="desc"></slot>
         </p>
       </article>

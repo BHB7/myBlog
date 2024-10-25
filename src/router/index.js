@@ -22,6 +22,11 @@ const router = createRouter({
       path: '/root',
       name: 'root',
       component: () => import('@/views/root/root.vue')
+    },
+    {
+      path: '/articleDetail',
+      name: 'articleDetail',
+      component: () => import('@/views/articleDetail/index.vue')
     }
   ]
 })
