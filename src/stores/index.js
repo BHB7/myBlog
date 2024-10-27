@@ -16,3 +16,4 @@ export default pinia
 
 // 将模块下的所有子模块全部导入导出
 export * from './modules/user'
+export * from './modules/changeCodeTheme'

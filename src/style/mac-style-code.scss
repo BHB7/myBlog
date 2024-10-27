@@ -1,0 +1,36 @@
+/* mac-style-code.css */
+/* 代码块盒子 */
+.code-block code.hljs {
+  width: 100%;
+  padding: 1.2rem; /* 移除内边距 */
+  height: 100%;
+  border-radius: 5px;
+  overflow: auto;
+}
+
+.code-block {
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .dots {
+      display: flex;
+      .dot {
+        margin: 0 0.1rem;
+        border-radius: 50%;
+        display: block;
+        width: 1rem;
+        height: 1rem;
+      }
+      .red {
+        background-color: #ff3b30;
+      }
+      .yellow {
+        background-color: #ffcc00;
+      }
+      .green {
+        background-color: #4cd964;
+      }
+    }
+  }
+}

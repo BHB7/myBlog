@@ -3,19 +3,18 @@ import '@/assets/font/iconfont.css'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import Bmob from 'hydrogen-js-sdk'
 import pinia from './stores'
-// 初始化 SDK (版本 2.0.0 以下保留之前的初始化方法)
-Bmob.initialize('abccda521461eb31', '7zop0010921')
+// highlight.js代码高亮插件
+// 引入 highlight.js 样式
 
-// 创建 Vue 实例
+// import 'highlight.js/styles/xcode.css'
+
+import Highlight from '@/directive/highlight' // 这里是你项目highlight.js所在路径
 const app = createApp(App)
 
-// 挂载 Bmob 到全局使用 (Vue 3 中使用 config.globalProperties)
-app.config.globalProperties.$Bmob = Bmob
+app.use(Highlight) // 使用代码高亮插件
+app.use(pinia) // 使用 Pinia 状态管理
+app.use(router) // 使用 Vue Router
 
-app.use(pinia)
-app.use(router)
-
-// 挂载到 #app 元素
+// 将应用挂载到 DOM 中的 #app 元素上
 app.mount('#app')

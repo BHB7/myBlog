@@ -1,50 +1,74 @@
 <script setup>
-import myMenuBar from '@/components/myMenuBar.vue'
-import { watchEffect, ref, reactive, onMounted } from 'vue'
+import { watchEffect, ref, reactive, nextTick } from 'vue'
 import { useRoute } from 'vue-router'
 import { getArticleDetailsService } from '@/api/articles.js'
-import hljs from 'highlight.js/lib/core'
-import javascript from 'highlight.js/lib/languages/javascript'
-import 'highlight.js/styles/stackoverflow-light.css'
-import { nextTick } from 'vue'
-import xml from 'highlight.js/lib/languages/xml' // 使用 xml 以支持 HTML
-
-// 注册 xml 作为 html 语言
-hljs.registerLanguage('html', xml)
-
-// 导入需要的语言
-hljs.registerLanguage('javascript', javascript)
+import hljs from 'highlight.js'
+import 'highlight.js/styles/github-dark.css'
 
 const route = useRoute()
 const aid = ref(Number(route.query.aid))
-hljs.highlightAll()
-// 使用 reactive 创建响应式对象
+
 const articleCont = reactive({
   article_content: '',
   article_title: ''
 })
+const codeBlocks = ref([])
 
-// 封装高亮代码的方法
-const applyHighlight = async () => {
-  await nextTick() // 等待 DOM 更新完成
-  document.querySelectorAll('pre code').forEach((block) => {
-    hljs.highlightElement(block)
-  })
-}
-// 监听 aid 的变化，并在变化时获取文章详情
 watchEffect(async () => {
   try {
     const res = await getArticleDetailsService(aid.value)
-    console.log(res.data)
-    // 更新响应式对象
     Object.assign(articleCont, res.data.article)
-    console.log(articleCont)
-    // 应用代码高亮
-    applyHighlight()
+
+    const parser = new DOMParser()
+    const doc = parser.parseFromString(articleCont.article_content, 'text/html')
+    const codeElements = doc.querySelectorAll('pre code')
+
+    codeElements.forEach((codeElement, index) => {
+      codeBlocks.value.push(codeElement.textContent || '')
+
+      const placeholder = document.createElement('code-placeholder')
+      placeholder.setAttribute('index', index)
+
+      const preElement = codeElement.closest('pre')
+      if (preElement) {
+        preElement.replaceWith(placeholder)
+      }
+    })
+
+    articleCont.article_content = doc.body.innerHTML
+    await nextTick()
+    replacePlaceholders()
   } catch (error) {
     console.error('Failed to fetch article details:', error)
   }
 })
+
+function replacePlaceholders() {
+  const placeholders = document.querySelectorAll('code-placeholder')
+  placeholders.forEach((placeholder) => {
+    const index = parseInt(placeholder.getAttribute('index'))
+    const codeContent = codeBlocks.value[index]
+
+    const codeElement = document.createElement('pre')
+    codeElement.classList.add('code-block')
+    codeElement.innerHTML = `
+    <div class="top">
+      <span class="dots">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+      </span>
+      <button class="copy-button">复制代码</button>
+      </div>
+      <code></code>
+    `
+    const codeInnerElement = codeElement.querySelector('code')
+    codeInnerElement.textContent = codeContent
+    hljs.highlightElement(codeInnerElement) // 自动格式化
+
+    placeholder.replaceWith(codeElement)
+  })
+}
 </script>
 
 <template>
@@ -83,7 +107,7 @@ c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z"
         </g>
       </svg>
       <!-- 标题 -->
-      <h1>{{ articleCont.article_title }}</h1>
+      <h1 class="xl:text-2xl text-xl">{{ articleCont.article_title }}</h1>
     </div>
 
     <!--波浪容器-->
@@ -115,15 +139,18 @@ c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z"
   <!--头部结束-->
 
   <!--内容开始-->
-  <div class="cont-box h-lvh flex lg:my-2 py-4 m-auto max-w-5xl w-full px-2 lg:px-0">
+  <div class="cont-box rounded-3xl h-full flex py-4 m-auto max-w-6xl w-full lg:px-0">
     <!-- 使用 flex 布局 -->
     <!-- 内容展示 -->
-    <div class="flex-1">
+    <div class="flex-1 p-2 rounded-xl">
       <!-- 使用 v-html 渲染 HTML 内容 -->
-      <div v-html="articleCont.article_content"></div>
+      <div v-highlight>
+        <div v-html="articleCont.article_content" class="article-content rounded-md"></div>
+      </div>
     </div>
+
     <!-- 菜单栏 -->
-    <div class="menu w-64 ml-3 h-lvh lg:block hidden">
+    <div class="menu w-64 md:mt-5 mt-2 ml-3 h-lvh lg:block hidden">
       <myMenuBar>
         <template #title><span class="iconfont icon-huatifuhao"></span>最新文章</template>
       </myMenuBar>
@@ -133,29 +160,92 @@ c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z"
   <!--内容结束-->
 </template>
 
-<style scss scoped>
+<style lang="scss" scoped>
 @import url(//fonts.googleapis.com/css?family=Lato:300:400);
-
-h1 {
-  font-family: 'Lato', sans-serif;
-  font-weight: 300;
-  letter-spacing: 2px;
-  font-size: 48px;
+.code-block {
+  background: #2d2d2d;
+  padding: 1em;
+  border-radius: 8px;
+  color: #fff;
+  position: relative;
 }
 
-p {
+.dots {
+  position: absolute;
+  top: 0.5em;
+  left: 0.5em;
+}
+
+.copy-button {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+// 颜色变量
+$primary-color: #4a4a4a;
+$text-color: #333;
+$code-bg: #2d2d2d;
+$code-color: rgb(201, 209, 217);
+$inline-code-bg: #f5f5f5;
+$header-bg: linear-gradient(60deg, rgba(84, 58, 183, 1) 0%, rgba(0, 172, 193, 1) 100%);
+
+// 基础样式
+body {
   font-family: 'Lato', sans-serif;
-  letter-spacing: 1px;
-  font-size: 14px;
-  color: #333333;
+}
+
+.article-content {
+  color: $text-color;
+  line-height: 1.6;
+  padding: 1rem;
+
+  h1,
+  h2,
+  h3 {
+    color: $primary-color;
+    margin: 1.5rem 0 0.5rem; // 顶部和底部间距
+  }
+
+  p {
+    margin: 0.5rem 0; // 段落间距
+  }
+
+  img {
+    max-width: 100%; // 确保图片不超出容器
+    height: auto; // 保持纵横比
+    display: block; // 将图片作为块元素显示
+    margin: 0.5rem 0; // 图片上下间距
+  }
+
+  pre {
+    color: $code-color;
+    padding: 1em; // 内边距
+    background: #2d2d2d;
+    overflow: auto; // 允许滚动
+    margin: 1em 0; // 外边距
+    code {
+      border-radius: 10px; // 圆角
+      background: $code-bg;
+      background: $inline-code-bg; // 行内代码背景
+      padding: 2px 4px; // 内边距
+      border-radius: 4px; // 圆角
+    }
+  }
 }
 
 .header {
   position: relative;
   text-align: center;
-  background: linear-gradient(60deg, rgba(84, 58, 183, 1) 0%, rgba(0, 172, 193, 1) 100%);
+  background: $header-bg;
   color: white;
+  padding: 20px 0; // 顶部和底部内边距
 }
+
 .logo {
   width: 50px;
   fill: white;
@@ -174,33 +264,34 @@ p {
 .waves {
   position: relative;
   width: 100%;
-  height: 15vh;
-  margin-bottom: -7px; /*Fix for safari gap*/
+  height: 16vh;
+  margin-bottom: -20px; /* Fix for Safari gap */
   min-height: 100px;
   max-height: 150px;
 }
 
 /* Animation */
-
 .parallax > use {
   animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+
+  &:nth-child(1) {
+    animation-delay: -2s;
+    animation-duration: 7s;
+  }
+  &:nth-child(2) {
+    animation-delay: -3s;
+    animation-duration: 10s;
+  }
+  &:nth-child(3) {
+    animation-delay: -4s;
+    animation-duration: 13s;
+  }
+  &:nth-child(4) {
+    animation-delay: -5s;
+    animation-duration: 20s;
+  }
 }
-.parallax > use:nth-child(1) {
-  animation-delay: -2s;
-  animation-duration: 7s;
-}
-.parallax > use:nth-child(2) {
-  animation-delay: -3s;
-  animation-duration: 10s;
-}
-.parallax > use:nth-child(3) {
-  animation-delay: -4s;
-  animation-duration: 13s;
-}
-.parallax > use:nth-child(4) {
-  animation-delay: -5s;
-  animation-duration: 20s;
-}
+
 @keyframes move-forever {
   0% {
     transform: translate3d(-90px, 0, 0);
@@ -209,13 +300,17 @@ p {
     transform: translate3d(85px, 0, 0);
   }
 }
-/*Shrinking for mobile*/
+
+/* Responsive Design */
 @media (max-width: 768px) {
+  .inner-header {
+    height: 40vh;
+  }
   .waves {
     height: 40px;
     min-height: 40px;
   }
-  .content {
+  .cont-box {
     height: 30vh;
   }
   h1 {
