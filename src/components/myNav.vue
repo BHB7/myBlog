@@ -7,11 +7,10 @@ import themes from '@/components/themes.vue'
     <nav class="flex lg:my-4 my-2 h-10 justify-center items-center">
       <div class="cont max-w-5xl w-full h-full flex justify-between items-center">
         <div class="ml-5 lg:hidden">
-          <myIconBtn :icon="'menu'" :size="18"></myIconBtn>
+          <span class="iconfont icon-caidan"></span>
         </div>
-        <div class="logo font-black flex flex-2 text-3xl justify-center items-center h-full w-24">
-          <span class="">7</span>
-          <span class="text-orange-600">z</span>
+        <div class="logo font-black flex flex-2 text-2xl justify-center items-center h-full w-24">
+          BLOG
         </div>
         <ul class="flex items-center">
           <!-- 链接 -->
@@ -44,6 +43,9 @@ import themes from '@/components/themes.vue'
 body {
   @include background_color('bg-color');
   @include font_color('font-color');
+}
+.iconfont {
+  font-size: 1.5rem;
 }
 ul {
   li {
