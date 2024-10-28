@@ -4,8 +4,11 @@ import themes from '@/components/themes.vue'
 </script>
 <template>
   <div class="fixed backdrop-blur-md z-50 top-0 w-full">
-    <nav class="flex lg:my-5 h-10 justify-center items-center">
+    <nav class="flex lg:my-4 my-2 h-10 justify-center items-center">
       <div class="cont max-w-5xl w-full h-full flex justify-between items-center">
+        <div class="ml-5 lg:hidden">
+          <myIconBtn :icon="'menu'" :size="18"></myIconBtn>
+        </div>
         <div class="logo font-black flex flex-2 text-3xl justify-center items-center h-full w-24">
           <span class="">7</span>
           <span class="text-orange-600">z</span>
@@ -25,15 +28,10 @@ import themes from '@/components/themes.vue'
             <li class="ml-5">
               <myIconBtn :icon="'search'" :size="18"></myIconBtn>
             </li>
-            <li class="ml-5 lg:hidden">
-              <myIconBtn :icon="'menu'" :size="18"></myIconBtn>
-            </li>
+
             <!-- <li class="ml-5">
             <myIconBtn :icon="'user'" :size="18"></myIconBtn>
           </li> -->
-            <li>
-              <themes></themes>
-            </li>
           </div>
         </ul>
       </div>

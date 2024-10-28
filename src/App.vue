@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted } from 'vue'
-
+import myNav from '@/components/myNav.vue'
 onMounted(() => {
   const theme = document.documentElement.getAttribute('data-code-theme')
   if (theme === 'a11y-dark') {
@@ -12,6 +12,7 @@ onMounted(() => {
 </script>
 
 <template>
+  <myNav></myNav>
   <router-view></router-view>
   <div class="w-full fixed h-8 bottom-0 left-0">
     <div class="footer w-full h-full px-4">

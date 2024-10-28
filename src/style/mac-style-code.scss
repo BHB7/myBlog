@@ -1,15 +1,23 @@
 /* mac-style-code.css */
 /* 代码块盒子 */
 .code-block code.hljs {
-  width: 100%;
+  // max-width: 1200px;
+  // width: 90vw;
+  // min-width: 10px;
   padding: 1.2rem; /* 移除内边距 */
-  height: 100%;
+  max-height: 300px;
   border-radius: 5px;
   overflow: auto;
 }
 
 .code-block {
+  margin: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   .top {
+    margin: 6px 0;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -31,6 +39,9 @@
       .green {
         background-color: #4cd964;
       }
+    }
+    .copy-button {
+      padding: 0 1.2rem;
     }
   }
 }

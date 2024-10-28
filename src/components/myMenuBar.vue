@@ -1,18 +1,18 @@
 <script setup></script>
 <template>
   <section class="w-full shadow-xl bg-gray-200 p-2 rounded-md">
-    <header class="w-full h-10 flex items-center hr">
+    <header class="w-full flex items-center">
       <slot name="title">
         <!-- 标题 -->
-        <div class="w-full h-full flex items-center">
+        <!-- <div class="w-full h-full flex items-center hr">
           <span class="text-red-700 font-extraboldW font">今日</span>
           <h3 class="font text-slate-700">推荐</h3>
-        </div>
+        </div> -->
       </slot>
       <!--  -->
     </header>
 
-    <slot> </slot>
+    <slot></slot>
   </section>
 </template>
 

@@ -12,7 +12,6 @@ const backgroundImageUrl = ref(
 </script>
 
 <template>
-  <div class="w-20 h-lvh rounded-sm backdrop-blur-xl fixed"></div>
   <div class="body-box" :style="{ backgroundImage: `url(${backgroundImageUrl})` }"></div>
   <!-- 版心图 -->
   <!-- <div class="cont flex h-96 bg-black"></div> -->

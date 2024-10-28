@@ -4,7 +4,7 @@ import { useRoute } from 'vue-router'
 import { getArticleDetailsService } from '@/api/articles.js'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/github-dark.css'
-
+import user from '@/components/user.vue'
 const route = useRoute()
 const aid = ref(Number(route.query.aid))
 
@@ -58,7 +58,7 @@ function replacePlaceholders() {
         <span class="dot yellow"></span>
         <span class="dot green"></span>
       </span>
-      <button class="copy-button">复制代码</button>
+     
       </div>
       <code></code>
     `
@@ -144,16 +144,14 @@ c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z"
     <!-- 内容展示 -->
     <div class="flex-1 p-2 rounded-xl">
       <!-- 使用 v-html 渲染 HTML 内容 -->
-      <div v-highlight>
+      <div v-highlight class="xl:w-full lg:w-full w-svw">
         <div v-html="articleCont.article_content" class="article-content rounded-md"></div>
       </div>
     </div>
 
     <!-- 菜单栏 -->
     <div class="menu w-64 md:mt-5 mt-2 ml-3 h-lvh lg:block hidden">
-      <myMenuBar>
-        <template #title><span class="iconfont icon-huatifuhao"></span>最新文章</template>
-      </myMenuBar>
+      <user></user>
     </div>
   </div>
 
@@ -239,6 +237,7 @@ body {
 }
 
 .header {
+  width: 100%;
   position: relative;
   text-align: center;
   background: $header-bg;
