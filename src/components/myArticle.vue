@@ -25,7 +25,7 @@
         </p>
       </article>
       <div class="font-light truncate-multiline-h text-xs text-white items-center flex">
-        <div class="flex my-2">
+        <div class="flex my-2 flex-nowrap">
           <span class="iconfont icon-shijian mr-1"></span>
           <span>发布于：<slot name="time">1984-9-9</slot></span>
         </div>
