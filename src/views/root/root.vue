@@ -1,7 +1,7 @@
 <script setup>
 import myIconBtn from '@/components/myIconBtn.vue'
 import myRowTab from '@/components/myRowTab.vue'
-import { addArticleU } from '@/api/articles'
+// import { addArticleU } from '@/api/articles'
 import myUploadImg from '@/components/myUploadImg.vue'
 import { ref } from 'vue'
 // addArticleU({
