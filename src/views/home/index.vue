@@ -17,7 +17,7 @@ onMounted(() => {
       // 获取分类数据
       return getCategoryService().then((result2) => {
         // 使用 map 方法创建一个新的 articles 数组
-        articles.value = result.data.map((item) => {
+        articles.value = result.data.articles.map((item) => {
           // 找到对应的分类名称
           const category = result2.data.find((item2) => item2.category_id === item.category_id)
           return {
