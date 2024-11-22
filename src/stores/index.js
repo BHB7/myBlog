@@ -1,19 +1,13 @@
 import { createPinia } from 'pinia'
-import persist from 'pinia-plugin-persistedstate'
+// 持久化插件
+import piniaPluginPersist from 'pinia-plugin-persist'
 
-const pinia = createPinia()
-pinia.use(persist)
 
-export default pinia
+const pinain = createPinia().use(piniaPluginPersist)
 
-// import { useUserStore } from './modules/user'
-// import { useCounterStore } from './modules/counter'
-// export {
-//     useUserStore,
-//     useCounterStore
+export default pinain
 
-// }
 
-// 将模块下的所有子模块全部导入导出
-export * from './modules/user'
-export * from './modules/changeCodeTheme'
+export * from './modules/count'
+export * from './modules/article'
+export * from './modules/theme'

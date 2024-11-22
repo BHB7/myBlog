@@ -1,0 +1,99 @@
+// 定义颜色变量
+$light-text: #E0E0E0;
+$dark-background: #121212;
+$highlight-color: #BB86FC;
+$button-bg: #373737;
+$button-border: #424242;
+
+// 夜间模式的基本样式
+html.dark {
+    color: $light-text;
+    background-color: $dark-background;
+    .header-container{
+        border-bottom: 1px solid #0f172a1a;
+        background: rgba($dark-background, $alpha: 0.3);
+        backdrop-filter: blur(10px);
+
+    }
+    .footer-container{
+        border-top: 1px solid #0f172a1a;
+        background: rgba($dark-background, $alpha: 0.3);
+        backdrop-filter: blur(10px);
+    }
+    .main-container{
+        background: rgba($color: #888, $alpha: 0.3);
+    }
+    // 图片滤镜
+    img {
+        filter: brightness(0.5);
+    }
+
+    // 链接样式
+    a {
+        color: $highlight-color;
+    }
+
+    // 按钮样式
+    button,
+    input[type="button"] {
+        background-color: $button-bg;
+        color: $light-text;
+        border: 1px solid $button-border;
+    }
+
+    // 表格样式
+    table {
+        border-collapse: collapse;
+        width: 100%;
+
+        th, td {
+            border: 1px solid $button-border;
+            padding: 8px;
+            text-align: left;
+            color: $light-text;
+        }
+
+        th {
+            background-color: darken($button-bg, 5%);
+        }
+    }
+
+    // 表单输入样式
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    textarea {
+        background-color: lighten($dark-background, 5%);
+        color: $light-text;
+        border: 1px solid $button-border;
+        padding: 8px;
+    }
+
+    // 卡片样式
+    .el-card{
+        background-color: $dark-background !important;
+        .md-editor-previewOnly{
+            background-color: $dark-background !important;
+        }
+        color: $light-text;
+        // border-radius: 4px;
+        // padding: 16px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    // 标题样式
+    h1, h2, h3, h4, h5, h6 {
+        color: lighten($light-text, 10%);
+    }
+
+    // 列表样式
+    ul, ol {
+        list-style-type: none;
+        padding-left: 0;
+
+        li {
+            color: $light-text;
+            margin-bottom: 8px;
+        }
+    }
+}

@@ -1,54 +1,45 @@
-import { fileURLToPath, URL } from 'node:url'
-
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import vueDevTools from 'vite-plugin-vue-devtools'
-
-// https://vitejs.dev/config/
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import { resolve } from 'path'
+import tailwindcss from 'tailwindcss'
+import autoprefixer from 'autoprefixer'
+// 自动导入icons导入插件
+import Icons from 'unplugin-icons/vite';
+import { createSvgIconsPlugin } from "vite-plugin-svg-icons"
+// https://vite.dev/config/
 export default defineConfig({
-  plugins: [vue(), vueDevTools()],
-  publicPath: './', //打包后的位置(如果不设置这个静态资源会报404)
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+  resolve:{
+    alias:{
+      "@": resolve(__dirname, "./src"),
     }
-  },
-  base: '/',
-  // 生产环境移除console.log的配置
-  build: {
-    // 默认是esbuild,但这里需要改成terser，并且想使用terser的话，需提前安装，命令为npm add -D
-    //terser
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        //生产环境时移除console
-        drop_console: true,
-        drop_debugger: true
-      }
-    }
-  },
-  server: {
-    proxy: {
-      '/blog': {
-        target: 'https://blogs.vocucc.cn/api',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/blog/, '')
-      },
-      '/scHot': {
-        target: 'https://kuwo.cn/openapi/v1/www/search',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/scHot/, '')
-      }
-    }
-  },
-  css: {
-    // css预处理器
-    preprocessorOptions: {
-      scss: {
-        // 引入 handle.scss 这样就可以在全局中使用 handle.scss中预定义的变量了
-        // 给导入的路径最后加上 ;
-        additionalData: '@import "@/style/theme/handle.scss";'
-      }
+  }
+  ,
+  plugins: [
+    vue(),
+    AutoImport({
+      resolvers: [ElementPlusResolver()],
+    }),
+    Components({
+      resolvers: [ElementPlusResolver()],
+    }),
+    // svg
+    createSvgIconsPlugin({
+      iconDirs: [resolve(process.cwd(), "src/icons/svg")]
+    }),
+    // icon自动导入
+    Icons({
+      autoInstall: true
+    })
+  ],
+  css:{
+    postcss:{
+      plugins: [
+        tailwindcss,
+        autoprefixer
+      ]
     }
   }
 })

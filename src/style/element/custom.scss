@@ -1,0 +1,35 @@
+.el-menu{
+    border-bottom: none !important;
+    background: transparent !important;
+    .el-menu-item{
+        color: white !important;
+    }
+    .el-menu-item:hover{
+
+        background: transparent !important;
+    }
+    .el-menu-item:focus{
+        background: transparent !important;
+    }
+    .el-sub-menu__title{
+        color: white !important;
+        background: transparent !important;
+    }
+    .el-menu-item .is-active{
+        color: black !important;
+    }
+}
+
+
+.el-card{
+    .el-card__body{
+        padding: 0 !important;
+        border: none !important;
+    }
+}
+.el-switch.is-checked .el-switch__core{
+   svg{
+    color: #a1a1a1 !important;
+   }
+    background: #c6c6c6 !important;
+}

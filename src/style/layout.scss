@@ -1,0 +1,26 @@
+$header-height: 60px;
+$footer-height:120px;
+.header-container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    padding: 0 20px;
+    border-bottom: 1px solid #0f172a1a;
+    height: $header-height;
+    background: rgba($color: (#fff), $alpha: 0.3);
+    backdrop-filter: blur(10px);
+}
+.footer-container{
+    border-top: 1px solid #0f172a1a;
+    background: rgba($color: (#fff), $alpha: 0.3);
+    height: $footer-height;
+    backdrop-filter: blur(10px);
+}
+.main-container{
+    width: 100%;
+    // padding-top: 60px;
+    min-height: calc(100vh - $footer-height );
+    background: rgba($color: #888, $alpha: 0.3);
+}
