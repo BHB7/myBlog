@@ -54,5 +54,5 @@ jobs:
           password: ${{ secrets.REMOTE_PASS }}
           port: ${{ secrets.REMOTE_PORT }}
           source: 'dist'
-          target: '/www/wwwroot/blog/blogView/'
+          target: '/www/wwwroot/blog/blogView'
           debug: true
