@@ -70,7 +70,7 @@ const handelDrawer = (flag) => {
             <LineMdMenu class="md:hidden block w-[1.5rem] h-[1.5rem]" @click="handelDrawer"></LineMdMenu>
            <h2 class="md:hidden block">7z</h2>
            <div class="md:hidden block">
-               <el-switch v-model="isDark" size="large" class="mx-[1rem]"  @change="onChange" >
+               <el-switch v-model="isDark" size="large" class="ml-[1rem]"  @change="onChange" >
                    <template #active-action>
                        <LineMdMoonTwotoneAltLoop></LineMdMoonTwotoneAltLoop>
                    </template>
@@ -103,7 +103,7 @@ const handelDrawer = (flag) => {
             </el-menu>
             <el-avatar>m</el-avatar>
             <!-- <GgDarkMode></GgDarkMode> -->
-            <el-switch v-model="isDark" size="large" class=" mx-[1rem]"  @change="onChange" >
+            <el-switch v-model="isDark" size="large" class="ml-[1rem]"  @change="onChange" >
                 <template #active-action>
                     <LineMdMoonTwotoneAltLoop></LineMdMoonTwotoneAltLoop>
                 </template>
@@ -115,7 +115,7 @@ const handelDrawer = (flag) => {
     </div>
     <!-- 侧边栏 -->
   <el-drawer size="100%" v-model="drawer" direction="ltr"  modal>
-    <span>Hi there!</span>
+    <span>功能暂未完善</span>
   </el-drawer>
 
 </template>
