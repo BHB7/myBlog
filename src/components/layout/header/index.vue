@@ -68,7 +68,7 @@ const handelDrawer = (flag) => {
         <div class="left flex md:w-[20%] w-[100%] md:justify-center justify-between items-center">
             <svg-icon name="logo" class="logo md:block hidden w-[2.5rem] h-[2.5rem]"></svg-icon>
             <LineMdMenu class="md:hidden block w-[1.5rem] h-[1.5rem]" @click="handelDrawer"></LineMdMenu>
-           <h2 class="md:hidden block">7z</h2>
+           <!-- <h2 class="md:hidden block">7z</h2> -->
            <div class="md:hidden block">
                <el-switch v-model="isDark" size="large"  @change="onChange" >
                    <template #active-action>
