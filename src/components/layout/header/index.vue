@@ -114,7 +114,7 @@ const handelDrawer = (flag) => {
         </div>
     </div>
     <!-- 侧边栏 -->
-  <el-drawer size="100%" v-model="drawer" direction="ltr"  modal>
+  <el-drawer size="80%" v-model="drawer" direction="ltr"   modal>
     <span>功能暂未完善</span>
   </el-drawer>
 
