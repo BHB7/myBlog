@@ -70,7 +70,7 @@ const handelDrawer = (flag) => {
             <LineMdMenu class="md:hidden block w-[1.5rem] h-[1.5rem]" @click="handelDrawer"></LineMdMenu>
            <h2 class="md:hidden block">7z</h2>
            <div class="md:hidden block">
-               <el-switch v-model="isDark" size="large" class="ml-[1rem]"  @change="onChange" >
+               <el-switch v-model="isDark" size="large"  @change="onChange" >
                    <template #active-action>
                        <LineMdMoonTwotoneAltLoop></LineMdMoonTwotoneAltLoop>
                    </template>
