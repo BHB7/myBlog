@@ -73,23 +73,23 @@ const loadMore = ref(true)
 const getTalkList = () => {
     let current = (params.currenPage - 1) * params.pageSize
     let sliceList = staticTalkList.slice(current, current + params.pageSize)
-    talkList.value = params.currenPage === 1 ? sliceList : [...talkList.value, ...sliceList ]
-    if(talkList.value.length === staticTalkList.length) loadMore.value = false
+    talkList.value = params.currenPage === 1 ? sliceList : [...talkList.value, ...sliceList]
+    if (talkList.value.length === staticTalkList.length) loadMore.value = false
 }
 
 const observeTalk = () => {
     observe = new IntersectionObserver((entries) => {
         entries.forEach((t) => {
-            if(t.isIntersecting){
-                params.currenPage ++
+            if (t.isIntersecting) {
+                params.currenPage++
                 console.log(111);
-                
+
                 getTalkList()
             }
         })
     })
     // nextTick(() => {
-        observe.observe(observeDom.value)
+    observe.observe(observeDom.value)
     // })
 }
 const initTalk = () => {
@@ -109,38 +109,39 @@ onBeforeUnmount(() => {
 
 
 <template>
-    <div>
-        <!-- 单个说说 卡片 -->
-        <el-card class="mb-2" v-for="talk in talkList" :key="talk.id">
-            <div class="talk-box p-[2rem]">
-                <div class="talk-item flex mb-2" >
-                    <div class="left mr-4">
-                        <el-avatar fit="cover" :size="64">{{ talk.nick_name }}</el-avatar>
-                    </div>
-                    <div class="right flex flex-col items-start">
-                        <div class="nick-name text-xl mb-2">{{ talk.nick_name }}</div>
-                        <div class="content mb-2">{{ talk.content }}</div>
-                        <!-- 多张网格 -->
-                        <div v-if="talk.imageList.length > 1" class="image grid grid-cols-3 gap-1">
-                            <div v-for="img in talk.imageList" :key="img" class="image-item overflow-hidden w-[6.3rem] h-[6.3rem]">
-                                <el-image class="w-[100%] h-[100%]" fit="cover" :src="img"></el-image>
-                            </div>
+    <!-- 单个说说 卡片 -->
+    <el-card class="w-[100%] mb-2" v-for="talk in talkList" :key="talk.id">
+        <div class="talk-box w-[100%] p-[1rem]">
+            <div class="talk-item flex md:flex-row flex-col mb-2">
+                <!-- 头像 -->
+                <div class="left md:block flex items-center mr-2 mb-4">
+                    <el-avatar fit="cover" :size="64">{{ talk.nick_name }}</el-avatar>
+                    <div class="nick-name text-xl ml-4 md:hidden">{{ talk.nick_name }}</div>
+                </div>
+                <div class="right flex flex-col items-start">
+                    <div class="nick-name text-xl mb-2 md:block hidden">{{ talk.nick_name }}</div>
+                    <div class="content mb-2">{{ talk.content }}</div>
+                    <!-- 多张网格 -->
+                    <div v-if="talk.imageList.length > 1" class="image grid grid-cols-3 gap-1">
+                        <div v-for="img in talk.imageList" :key="img"
+                            class="image-item overflow-hidden w-[6.3rem] h-[6.3rem]">
+                            <el-image class="w-[100%] h-[100%]" fit="cover" :src="img"></el-image>
                         </div>
-                        <!-- 单张大图 -->
-                         <div v-else class="image">
-                            <div class="image-item overflow-hidden w-[19.3rem] h-[19.3rem]">
-                                <el-image class="w-[100%] h-[100%]" fit="cover" :src="talk.imageList[0]"></el-image>
-                            </div>
-                         </div>
+                    </div>
+                    <!-- 单张大图 -->
+                    <div v-else class="image">
+                        <div class="image-item overflow-hidden w-[19.3rem] h-[19.3rem]">
+                            <el-image class="w-[100%] h-[100%]" fit="cover" :src="talk.imageList[0]"></el-image>
+                        </div>
                     </div>
                 </div>
             </div>
-        </el-card>
-        <!-- 尾部标记 用于判断动态加载数据 -->
-         <div ref="observeDom" class="end-observer text-center flex items-center w-[100%] justify-center">
-             <LineMdUploadOutlineLoop v-if="loadMore" class="mr-1"/>
-            {{ loadMore ? '上拉加载更多...' : '呜呜呜~ 已经到底啦' }}
-         </div>
+        </div>
+    </el-card>
+    <!-- 尾部标记 用于判断动态加载数据 -->
+    <div ref="observeDom" class="end-observer text-center flex items-center w-[100%] justify-center">
+        <LineMdUploadOutlineLoop v-if="loadMore" class="mr-1" />
+        {{ loadMore ? '上拉加载更多...' : '呜呜呜~ 已经到底啦' }}
     </div>
 </template>
 

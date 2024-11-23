@@ -1,12 +1,14 @@
 <script setup>
 import LineMdMoonAltToSunnyOutlineLoopTransition from '~icons/line-md/moon-alt-to-sunny-outline-loop-transition';
 import LineMdMoonTwotoneAltLoop from '~icons/line-md/moon-twotone-alt-loop';
+import LineMdMenu from '~icons/line-md/menu';
 import { defineAsyncComponent, ref } from 'vue';
 import { useRouter } from 'vue-router'
 import { useThemeStore } from '@/stores'
 import { storeToRefs } from 'pinia';
 const router = useRouter()
-
+// 侧边栏
+const drawer = ref(false)
 const { getIsDark } = storeToRefs(useThemeStore())
 
 const isDark = ref(getIsDark.value)
@@ -54,16 +56,32 @@ const handelSelect = (path) => {
     if (!path) return
     router.push(path)
 }
+
+const handelDrawer = (flag) => {
+    drawer.value = !drawer.value
+}
 </script>
 
 
 <template>
     <div class="header-container">
-        <div class="left">
-            <svg-icon name="logo" class="logo"></svg-icon>
+        <div class="left flex md:w-[20%] w-[100%] md:justify-center justify-between items-center">
+            <svg-icon name="logo" class="logo md:block hidden w-[2.5rem] h-[2.5rem]"></svg-icon>
+            <LineMdMenu class="md:hidden block w-[1.5rem] h-[1.5rem]" @click="handelDrawer"></LineMdMenu>
+           <h2 class="md:hidden block">7z</h2>
+           <div class="md:hidden block">
+               <el-switch v-model="isDark" size="large" class="mx-[1rem]"  @change="onChange" >
+                   <template #active-action>
+                       <LineMdMoonTwotoneAltLoop></LineMdMoonTwotoneAltLoop>
+                   </template>
+                   <template #inactive-action>
+                       <LineMdMoonAltToSunnyOutlineLoopTransition></LineMdMoonAltToSunnyOutlineLoopTransition>
+                   </template>
+               </el-switch>
+           </div>
         </div>
-        <div class="right">
-            <el-menu :ellipsis="false" class="el-menu-popper-demo" mode="horizontal" @select="handelSelect">
+        <div class="right md:flex flex-1 md:justify-end justify-center items-center hidden">
+            <el-menu :ellipsis="false" class="el-menu-popper-demo " mode="horizontal" @select="handelSelect">
                 <div v-for="(item) in menuList" :key="item.path">
                     <el-sub-menu v-if="item.children.length" :index="item.path">
                         <template #title>
@@ -93,9 +111,13 @@ const handelSelect = (path) => {
                     <LineMdMoonAltToSunnyOutlineLoopTransition></LineMdMoonAltToSunnyOutlineLoopTransition>
                 </template>
             </el-switch>
-         
         </div>
     </div>
+    <!-- 侧边栏 -->
+  <el-drawer size="100%" v-model="drawer" direction="ltr"  modal>
+    <span>Hi there!</span>
+  </el-drawer>
+
 </template>
 
 
@@ -105,32 +127,9 @@ const handelSelect = (path) => {
     // justify-content: space-between;
     align-content: center;
 
-    .left {
-        width: 20%;
 
-        .logo {
-            transition: all .5s;
-            width: 3rem;
-            height: 3rem;
 
-            &:hover {
-                transform: rotate(180deg);
-            }
-        }
-    }
 
-    .right {
-        flex: 1;
-        display: flex;
-        justify-content: end;
-        align-items: center;
-
-        .icon {
-            margin-right: 0.2rem;
-            width: 1rem;
-            height: 1rem;
-        }
-    }
 
     .icon {
         margin-right: 0.2rem;
