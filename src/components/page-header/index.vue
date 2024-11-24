@@ -80,7 +80,7 @@ onMounted(() => {
 
         <!-- 首页 -->
         <div v-if="route.path === '/home'" ref="homeRef" class="home">
-            <el-image src="https://cn-sy1.rains3.com/testasd/1729018118381-a1.jpg" fit="cover"
+            <el-image src="https://cn-sy1.rains3.com/testasd/bg1.png" fit="cover"
                 class="banner"></el-image>
 
             <div class="content">

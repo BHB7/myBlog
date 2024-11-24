@@ -11,3 +11,4 @@ export default pinain
 export * from './modules/count'
 export * from './modules/article'
 export * from './modules/theme'
+export * from './modules/user'

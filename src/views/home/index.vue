@@ -29,6 +29,7 @@ import StashReadingTimeDuotone from '~icons/stash/reading-time-duotone';
 import LetsIconsPointersFill from '~icons/lets-icons/pointers-fill';
 import { onMounted, reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { homeGetArticleList } from '@/api/article.js'
 
 const router = useRouter()
 const articleList = ref([])
@@ -50,66 +51,6 @@ const staticArticleList = [
         tags: ['开心', '小心情', '话痨'],
         cartegory: '日常'
     },
-    {
-        "id": "2",
-        "title": "初探Vue3新特性",
-        "desc": "分享使用Vue3框架的心得体会，包括Composition API等新特性的实际应用。",
-        "cover": "http://img.mrzym.top/FswlMLf30bR2MeXCgorQSkUQ3ky2",
-        "createTime": "2024-11-10 10:00:00",
-        "updateTime": "2024-11-11 11:30:00",
-        "views": "2k",
-        "likes": "500",
-        "tags": ["前端开发", "Vue3", "Composition API"],
-        "cartegory": "技术"
-    },
-    {
-        "id": "3",
-        "title": "从零开始构建个人网站",
-        "desc": "详细介绍如何从域名购买到网站上线的全过程，适合初学者。",
-        "cover": "http://img.mrzym.top/FswlMLf30bR2MeXCgorQSkUQ3ky3",
-        "createTime": "2024-11-08 15:00:00",
-        "updateTime": "2024-11-12 16:00:00",
-        "views": "3.5k",
-        "likes": "700",
-        "tags": ["网站建设", "域名", "部署"],
-        "cartegory": "教程"
-    },
-    {
-        "id": "4",
-        "title": "我的旅行日记——京都之秋",
-        "desc": "记录了一次难忘的京都之旅，分享了沿途的风景和文化体验。",
-        "cover": "http://img.mrzym.top/FswlMLf30bR2MeXCgorQSkUQ3ky4",
-        "createTime": "2024-11-05 09:30:00",
-        "updateTime": "2024-11-07 10:45:00",
-        "views": "1.2k",
-        "likes": "300",
-        "tags": ["旅行", "日本", "文化"],
-        "cartegory": "生活"
-    },
-    {
-        "id": "5",
-        "title": "深度学习入门指南",
-        "desc": "为想要踏入深度学习领域的朋友们准备的一份全面指南，涵盖基础知识与实践技巧。",
-        "cover": "http://img.mrzym.top/FswlMLf30bR2MeXCgorQSkUQ3ky5",
-        "createTime": "2024-11-03 14:00:00",
-        "updateTime": "2024-11-09 15:15:00",
-        "views": "4.8k",
-        "likes": "1.2k",
-        "tags": ["人工智能", "机器学习", "深度学习"],
-        "cartegory": "技术"
-    },
-    {
-        "id": "5",
-        "title": "深度学习入门指南",
-        "desc": "为想要踏入深度学习领域的朋友们准备的一份全面指南，涵盖基础知识与实践技巧。",
-        "cover": "http://img.mrzym.top/FswlMLf30bR2MeXCgorQSkUQ3ky5",
-        "createTime": "2024-11-03 14:00:00",
-        "updateTime": "2024-11-09 15:15:00",
-        "views": "4.8k",
-        "likes": "1.2k",
-        "tags": ["人工智能", "机器学习", "深度学习"],
-        "cartegory": "技术"
-    }
 ]
 // 标签
 const tagList = ref([
@@ -118,17 +59,16 @@ const tagList = ref([
     { name: 'CV工程师', id: 3, checked: true, type: 'success' }, 
     {name:'Node', id: 4, checked: true, type: 'warning'}
 ])
-const getArticleList = () => {
-    let count = (params.currentPage - 1) * params.pageSize
-    articleList.value = staticArticleList.slice(count, count + params.pageSize)
-}
 
 const gotoArticle = (id) => {
     if(!id) return
     router.push({path: '/article', query: {id: id}}) 
 }
 onMounted(() => {
-    getArticleList()
+    homeGetArticleList(params.currentPage, params.pageSize).then(res => {
+        console.log(res);
+        
+    })
 })
 
 </script>

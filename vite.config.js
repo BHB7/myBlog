@@ -11,14 +11,32 @@ import Icons from 'unplugin-icons/vite';
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons"
 // https://vite.dev/config/
 export default defineConfig({
-  resolve:{
-    alias:{
+  resolve: {
+    alias: {
       "@": resolve(__dirname, "./src"),
     }
-  }
-  ,
-  server:{
-    open: true
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://api.vocucc.cn',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+        secure: false, // 如果使用 HTTPS，确保设置为 true
+      },
+      '/kwd': {
+        target: 'https://search.kuwo.cn',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+        secure: false, // 如果使用 HTTPS，确保设置为 true
+      },
+      '/scHot': {
+        target: 'https://kuwo.cn/openapi/v1/www/search',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/scHot/, ''),
+        secure: false, // 如果使用 HTTPS，确保设置为 true
+      }
+    },
   },
   plugins: [
     vue(),
@@ -37,12 +55,30 @@ export default defineConfig({
       autoInstall: true
     })
   ],
-  css:{
-    postcss:{
+  css: {
+    postcss: {
       plugins: [
         tailwindcss,
         autoprefixer
       ]
     }
-  }
+  },
+
+  // 打包输出
+  build: {
+    sourcemap: false,
+    // 消除打包大小超过500kb警告
+    chunkSizeWarningLimit: 4000,
+    rollupOptions: {
+      input: {
+        index: resolve("index.html"),
+      },
+      // 静态资源分类打包
+      output: {
+        chunkFileNames: "static/js/[name]-[hash].js",
+        entryFileNames: "static/js/[name]-[hash].js",
+        assetFileNames: "static/[ext]/[name]-[hash].[ext]",
+      },
+    },
+  },
 })
